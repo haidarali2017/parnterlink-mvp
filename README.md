@@ -102,9 +102,11 @@ On `MerchantApplicationService` / `ScreeningOutcomeHandler` (use-case layer) —
 
 Holding a DB transaction open across external I/O risks connection pool exhaustion and partial external side-effects on rollback. Pattern: commit local state (`SCREENING`) → then call MUN → callback updates status in a **new** transaction (`ScreeningOutcomeHandler`).
 
-## Claude Code usage note
+## AI-assisted development note
 
-**What Claude drafted:** project scaffold (`pom.xml`, package layout), MyBatis mapper XML boilerplate, MockMvc test skeletons, README outline.
+I used an AI coding agent (Cursor Agent — same class of agentic workflow as Claude Code) for speed on boilerplate.
+
+**What the agent drafted:** project scaffold (`pom.xml`, package layout), MyBatis mapper XML boilerplate, MockMvc test skeletons, README outline.
 
 **What I rewrote / caught in review (money & state logic):**
 - Moved `@Transactional` off any controller path; external MUN only via `TransactionSynchronization.afterCommit`
