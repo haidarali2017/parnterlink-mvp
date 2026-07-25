@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: partnerlink-mvp
+  datasource:
+    url: jdbc:mysql://localhost:3306/partnerlink?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: partnerlink
+    password: partnerlink
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+partnerlink:
+  mun:
+    # Simulated MUN screening delay (ms)
+    delay-ms: 200
+    # Max wait for screening result before TIMEOUT
+    timeout-ms: 2000
+    # APPROVED | REJECTED — mock decision for successful screens
+    default-result: APPROVED
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example.partnerlink: INFO
